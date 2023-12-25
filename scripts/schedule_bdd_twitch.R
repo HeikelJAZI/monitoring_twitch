@@ -5,7 +5,8 @@ library(taskscheduleR)
 
 
 # Chemin où se situe le script (à changer lors d'un push dans git)
-path_script <- "chemin_vers_le_script"
+# path <- "chemin_vers_le_script"
+path_script <- "c:/Users/Heikel/Desktop/00_projets_R/monitoring_twitch/scripts/"
 
 
 ## Lance le script toutes les cinq minutes, commence à 23h40

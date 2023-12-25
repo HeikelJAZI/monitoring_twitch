@@ -28,7 +28,9 @@ filename <- paste0(day , "_streams_twitch.csv")
 
 
 # Chemin où je dépose les données (à changer lors d'un push dans git)
-path_data <- "chemin_vers_les_données"
+# path <- "chemin_vers_les_données"
+path_data <- "c:/Users/Heikel/Desktop/00_projets_R/monitoring_twitch/data/"
+
 
 paste0("Heure de lancement : ", time)
 
@@ -37,6 +39,12 @@ suppressWarnings(suppressMessages(library("dbplyr", quietly = T)))
 suppressWarnings(suppressMessages(library("RSQLite", quietly = T)))
 
   # permet de requêter l'API de Twitch
+  # documentations + IMPORTANT dossier monitoring_twitch/docs_generate_token_twitch : 
+      # https://github.com/Freguglia/rTwitchAPI
+      # https://dev.twitch.tv/dashboard/apps/create
+      # https://dev.twitch.tv/docs/tutorials/extension-101-tutorial-series/create-extension/#creating-the-extension-in-the-console
+      # https://id.twitch.tv/oauth2/authorize?client_id=d6g6o112aam5s8q2di888us9o3kuyh&lang=en&login_type=login&redirect_uri=https%3A%2F%2Fwww.twitch.tv%2Fpassport-callback&response_type=token&scope=user_read&state=%7B%22origin%22%3A%22full_page%22%2C%22next%22%3A%22https%3A%2F%2Fdev.twitch.tv%2Fconsole%2Fextensions%22%2C%22nonce%22%3A%2275d68dee21a630113fc4cc5cf0ff2051%22%7D
+      # https://dev.twitch.tv/console/extensions
 
 suppressWarnings(suppressMessages(library("rTwitchAPI", quietly = T)))
 
@@ -58,6 +66,7 @@ print("                                              ")
 
 # Mise en place des variables d'environnement (à changer lors d'un push dans git)
 # Il est nécessaire de mettre en place directement dans le fichier pour le taskScheduler
+# Les informations sont dans le fichier .Renviron
 
 Sys.setenv(TWITCH_CLIENT_ID = "mettre l'identifiant")
 Sys.setenv(TWITCH_CLIENT_SECRET = "mettre la clé secrete")
@@ -103,13 +112,13 @@ reduce_streams_live <- reduce_streams_live %>% mutate(current_time = Sys.time())
 
 if(!file.exists(paste0(path_data,filename))){
   
-  print("Ecriture du fichier dans le dossier twitch_app")
+  print("Ecriture du fichier dans le dossier monitoring_twitch")
   
   write_csv(reduce_streams_live, paste0(path_data,filename))
   
 } else {
   
-  print("Lecture du fichier dans le dossier twitch_app")
+  print("Lecture du fichier dans le dossier monitoring_twitch")
   
   streams <- read_csv(paste0(path_data,filename))
   
@@ -122,7 +131,7 @@ if(!file.exists(paste0(path_data,filename))){
   
   streams <- streams %>% bind_rows(reduce_streams_live)
   
-  print("Ecriture du nouveau fichier dans le dossier twitch_app")
+  print("Ecriture du nouveau fichier dans le dossier monitoring_twitch")
   
   write_csv(streams, paste0(path_data,filename))
   
