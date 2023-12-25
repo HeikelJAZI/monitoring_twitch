@@ -40,7 +40,7 @@ shinyapps.io.
   - exécuter au pas 5 minutes cette démarche
 
 - L’application va afficher de nombreuses informations au sujet des
-  streams : (à compléter)
+  streams : (A COMPLETER)
 
   - premier point
   - deuxièreme point
@@ -59,8 +59,8 @@ mettre en place l’application à partir du script **à_déterminer.Rmd**.
 Twitch
 
 - L’utilisation de l’API de Twitch est indiqué dans le repos de la
-  librairie Twitch API : [Utiliser AliceFiles depuis
-  Poker](https://gopro-collaboratif.rte-france.com/pages/viewpage.action?pageId=125767641)
+  librairie rTwitchAPI : [Utilisation API
+  Twitch](https://github.com/Freguglia/rTwitchAPI)
 
 TaskScheduler
 
@@ -79,9 +79,12 @@ Ce projet est structuré de la manière suivante:
 
 ### 3.1 Pour le script automatique : Récupération des données de Twitch au pas 5 minutes
 
-- Un script `BDD_twitch_scheduled.R`. Il contient tout le code
+- Un script `scripts/BDD_twitch_scheduled.R`. Il contient tout le code
   permettant de gérer la base de données de Twitch avec les données sur
   le top 100 des streams français au pas 5 minutes
+- un script `scripts/schedule_bdd_twitch.R`. Il contient le code
+  permettant d’exécuter le script `scripts/BDD_twitch_scheduled.R` grâce
+  à la librairie `taskscheduleR`
 
 ### 3.2 Pour l’application : Etat des lieux de Twitch sur une semaine glissante
 
